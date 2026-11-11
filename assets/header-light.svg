@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="300" viewBox="0 0 1280 300" role="img" aria-label="Siddharth: Software Engineer, backend systems and applied AI">
+<defs>
+<pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#F0F3F6" stroke-width="1"/></pattern>
+<radialGradient id="r" cx="0.82" cy="0.45" r="0.55"><stop offset="0" stop-color="#CCFBF1" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0F766E" fill-opacity="0.8"/></marker>
+<clipPath id="c"><rect width="1280" height="300" rx="18"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="1280" height="300" fill="#FFFFFF"/>
+<rect width="1280" height="300" fill="url(#g)"/>
+<rect width="1280" height="300" fill="url(#r)"/>
+<rect x="0" y="0" width="6" height="300" fill="#0F766E"/>
+</g>
+<rect x="0.75" y="0.75" width="1278.5" height="298.5" rx="18" fill="none" stroke="#D0D7DE" stroke-width="1.5"/>
+<text x="64" y="92" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="16" letter-spacing="3" fill="#0F766E">SOFTWARE ENGINEER</text>
+<text x="62" y="168" font-family="'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif" font-size="76" font-weight="700" fill="#1F2328">Siddharth</text>
+<text x="64" y="212" font-family="'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif" font-size="24" fill="#59636E">Backend systems · Distributed pipelines · Applied AI</text>
+<text x="64" y="256" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#818B98">IIIT Naya Raipur  ·  B.Tech CSE  ·  2024–28</text>
+<rect x="770" y="70" width="110" height="42" rx="8" fill="#F0FDFA" stroke="#0F766E" stroke-width="1.5"/><text x="825.0" y="97" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#0F766E">api</text>
+<rect x="930" y="70" width="120" height="42" rx="8" fill="#F0FDFA" stroke="#0F766E" stroke-width="1.5"/><text x="990.0" y="97" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#0F766E">queue</text>
+<rect x="1100" y="70" width="130" height="42" rx="8" fill="#F0FDFA" stroke="#0F766E" stroke-width="1.5"/><text x="1165.0" y="97" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#0F766E">workers</text>
+<rect x="770" y="190" width="110" height="42" rx="8" fill="#F6F8FA" stroke="#D0D7DE" stroke-width="1.5"/><text x="825.0" y="217" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#59636E">cache</text>
+<rect x="930" y="190" width="120" height="42" rx="8" fill="#F6F8FA" stroke="#D0D7DE" stroke-width="1.5"/><text x="990.0" y="217" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#59636E">index</text>
+<rect x="1100" y="190" width="130" height="42" rx="8" fill="#F6F8FA" stroke="#D0D7DE" stroke-width="1.5"/><text x="1165.0" y="217" text-anchor="middle" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="15" fill="#59636E">llm</text>
+<line x1="880" y1="91" x2="927" y2="91" stroke="#0F766E" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#a)"/>
+<line x1="1050" y1="91" x2="1097" y2="91" stroke="#0F766E" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#a)"/>
+<line x1="825" y1="112" x2="825" y2="187" stroke="#0F766E" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#a)" stroke-dasharray="4 5"/>
+<line x1="1140" y1="112" x2="1000" y2="187" stroke="#0F766E" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#a)"/>
+<line x1="1180" y1="112" x2="1180" y2="187" stroke="#0F766E" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#a)"/>
+<text x="770" y="268" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="13" fill="#818B98">request → enqueue → process → retrieve → generate</text>
+</svg>
