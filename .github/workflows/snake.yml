@@ -1,0 +1,41 @@
+name: contribution-snake
+
+# Draws the contribution graph as an animated snake and publishes the SVGs to the
+# `output` branch, which the README reads from. Runs daily, on demand, and when
+# this file changes. Nothing is ever committed to `main`.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/snake.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contribution-snake
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Generate the snake from the contribution grid
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-dark.svg?palette=github-dark&color_snake=#2DD4BF&color_dots=#161B22,#0F3D3A,#0F766E,#14B8A6,#5EEAD4
+            dist/snake-light.svg?palette=github-light&color_snake=#0D9488&color_dots=#EBEDF0,#CCFBF1,#5EEAD4,#14B8A6,#0F766E
+
+      - name: Publish to the output branch
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Update contribution snake"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
