@@ -15,8 +15,8 @@
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=2600&pause=1100&color=2DD4BF&center=true&vCenter=true&width=760&height=34&lines=Backends%20that%20hold%20up%3A%20queues%2C%20retries%2C%20rate%20limits%2C%20tests;Hybrid%20retrieval%3A%20BM25%20%2B%20dense%20vectors%20%2B%20rank%20fusion;Multi-agent%20systems%20where%20humans%20make%20the%20final%20call;82%20PRs%20merged%20into%20a%20production%20AI%20interview%20platform;First%20author%20%C2%B7%20MMCITRE%202025%20%28Springer%29%20%C2%B7%20NCA%202026">
-  <img alt="Backends that hold up · Hybrid retrieval · Multi-agent systems · 82 PRs merged · First author, MMCITRE 2025 and NCA 2026" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=2600&pause=1100&color=0F766E&center=true&vCenter=true&width=760&height=34&lines=Backends%20that%20hold%20up%3A%20queues%2C%20retries%2C%20rate%20limits%2C%20tests;Hybrid%20retrieval%3A%20BM25%20%2B%20dense%20vectors%20%2B%20rank%20fusion;Multi-agent%20systems%20where%20humans%20make%20the%20final%20call;82%20PRs%20merged%20into%20a%20production%20AI%20interview%20platform;First%20author%20%C2%B7%20MMCITRE%202025%20%28Springer%29%20%C2%B7%20NCA%202026">
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=2600&pause=1100&color=2DD4BF&center=true&vCenter=true&width=760&height=34&lines=Backends%20that%20hold%20up%3A%20queues%2C%20retries%2C%20rate%20limits%2C%20tests;Hybrid%20retrieval%3A%20BM25%20%2B%20dense%20vectors%20%2B%20rank%20fusion;Multi-agent%20systems%20where%20humans%20make%20the%20final%20call;82%20PRs%20merged%20into%20a%20production%20AI%20interview%20platform;1st%20in%20AI%2FML%20at%20Hack-A-Sol%202026%20%C2%B7%20Top%2020%20of%20702%20at%20Flip%20the%20Switch;First%20author%20%C2%B7%20MMCITRE%202025%20%28Springer%29%20%C2%B7%20NCA%202026">
+  <img alt="Backends that hold up · Hybrid retrieval · Multi-agent systems · 82 PRs merged · 1st in AI/ML at Hack-A-Sol 2026, top 20 of 702 at Flip the Switch · First author, MMCITRE 2025 and NCA 2026" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=2600&pause=1100&color=0F766E&center=true&vCenter=true&width=760&height=34&lines=Backends%20that%20hold%20up%3A%20queues%2C%20retries%2C%20rate%20limits%2C%20tests;Hybrid%20retrieval%3A%20BM25%20%2B%20dense%20vectors%20%2B%20rank%20fusion;Multi-agent%20systems%20where%20humans%20make%20the%20final%20call;82%20PRs%20merged%20into%20a%20production%20AI%20interview%20platform;1st%20in%20AI%2FML%20at%20Hack-A-Sol%202026%20%C2%B7%20Top%2020%20of%20702%20at%20Flip%20the%20Switch;First%20author%20%C2%B7%20MMCITRE%202025%20%28Springer%29%20%C2%B7%20NCA%202026">
 </picture>
 
 <a href="https://www.linkedin.com/in/siddharth-a35a36324"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
@@ -87,6 +87,32 @@ Celery task chains on Redis, a Lua-scripted distributed semaphore and rate limit
 
 </details>
 
+<a href="https://github.com/Siddharthpandey20/ZeroGuessing">
+<picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/projects/zeroguess-dark-m.svg">
+  <source media="(max-width: 600px)" srcset="assets/projects/zeroguess-light-m.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/projects/zeroguess-dark.svg">
+  <img alt="ZeroGuess: 1st place, AI/ML track at Hack-A-Sol 2026. Answers from bank and insurance PDFs only when every sentence matches a quote, or says it has no proof." src="assets/projects/zeroguess-light.svg" width="100%">
+</picture>
+</a>
+
+The model may only write claims that cite numbered sentences from bank and insurance PDFs, and code checks every claim before anyone reads it; when nothing survives, the answer is *"I don't have proof for this."* **95.7% of answers correct** on 127 questions over ten real insurance policies, 5.3 points ahead of GPT-6 Luna in the same pipeline. **1st place, AI/ML track** at Hack-A-Sol 2026, as a team of three. Live and deployed.
+
+<a href="https://github.com/Siddharthpandey20/ZeroGuessing"><img src="assets/ui/btn-code.svg" height="30" alt="Code"></a>&nbsp;<a href="https://zeroguess-production.up.railway.app/"><img src="assets/ui/btn-live.svg" height="30" alt="Live App"></a>&nbsp;<a href="https://drive.google.com/file/d/1cTMxMfCiDXX6Jdb44rEvyx9vmzfnlZAr/view?usp=sharing"><img src="assets/ui/btn-demo.svg" height="30" alt="Demo Video"></a>
+
+<details>
+<summary><b>Engineering deep-dive</b></summary>
+<br>
+
+- **The model drafts, code checks.** Claims cite evidence IDs rather than typed quotes, so every quote shown is verbatim. Code checks that each ID exists, every number and date appears in its quote, and the clause is in force on the chosen date; only survivors reach a strict Gemini judge, and a failed judge call counts as "not verified". EMI and interest are computed in Python from cited figures, never by the model.
+- **Amendments are versions, not contradictions.** Amendment chains across documents resolve by effective date, so a question has one answer for any date and future-dated changes show as not yet in force. Real conflicts are flagged with both quotes side by side.
+- **Retrieval inside Postgres.** Clause-aware PyMuPDF ingestion keeps exact sentence positions and joins tables across page breaks; pgvector and full-text search are fused with reciprocal rank fusion, and verified answers stream over SSE.
+- **Documents are data, never instructions.** Each page is rendered with and without its text to find what a reader cannot see (white text over a box, invisible text over an image), which is stripped before parsing. Security fixes S1–S7 cover private-document isolation, per-user limits held by a Postgres advisory lock, and revocable share links, and an adversarial review of my own fixes closed four more holes.
+- **Results.** 95.7% correct (110 of 115 answerable questions), +5.3 points over GPT-6 Luna with only the model swapped, 96.5% of citations holding the exact quote, 3.5% false conflict alarms and 175 backend tests. Median answer time on the demo set fell from 24.5 s to 15.6 s.
+- **My part.** The backend and RAG architecture end to end, the verification pipeline, the security fixes, the evaluation, and the production deployment: one Docker image on Railway, OCR for scanned PDFs in English and Hindi, and Ed25519-signed share reports anyone can check at `/verify`.
+
+</details>
+
 <a href="https://github.com/Siddharthpandey20/CausalLine">
 <picture>
   <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/projects/causalline-dark-m.svg">
@@ -141,11 +167,11 @@ An async FastAPI platform (50+ endpoints, a 7-table schema, Google OAuth) that t
   <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/projects/proveit-dark-m.svg">
   <source media="(max-width: 600px)" srcset="assets/projects/proveit-light-m.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/projects/proveit-dark.svg">
-  <img alt="Prove It: code decides, agents argue, humans rule. Bug reports must reproduce in a sandbox before a maintainer reads them." src="assets/projects/proveit-light.svg" width="100%">
+  <img alt="Prove It: top 20 of 702 projects at Flip the Switch 2026. Code decides, agents argue, humans rule. Bug reports must reproduce in a sandbox before a maintainer reads them." src="assets/projects/proveit-light.svg" width="100%">
 </picture>
 </a>
 
-*Code decides, agents argue, humans rule.* AI-written bug reports must reproduce in a locked-down Docker sandbox before a maintainer reads them. It reproduced **two real CVEs**, with 325 tests green in CI. Team of four.
+*Code decides, agents argue, humans rule.* AI-written bug reports must reproduce in a locked-down Docker sandbox before a maintainer reads them. It reproduced **two real CVEs**, with 325 tests green in CI. **Top 20 of 702 projects** at Flip the Switch 2026, as a team of four.
 
 <a href="https://github.com/Siddharthpandey20/Prove_It-Code_decides-Agents_argue_and_Humans_rule"><img src="assets/ui/btn-code.svg" height="30" alt="Code"></a>&nbsp;<a href="https://youtu.be/wQ_h16DFlXc"><img src="assets/ui/btn-demo.svg" height="30" alt="Demo Video"></a>
 
@@ -214,14 +240,14 @@ Receipts go through OCR, LLM parsing and categorisation into a per-user FAISS in
   <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="assets/stack/stack-dark-m.svg">
   <source media="(max-width: 600px)" srcset="assets/stack/stack-light-m.svg">
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack/stack-dark.svg">
-  <img alt="Tech stack. Languages: Python, TypeScript, JavaScript, C++, C, SQL. Backend: FastAPI, Node.js, Express, Prisma, SQLAlchemy, Pydantic, Zod, LiveKit. Data: PostgreSQL, SQLite, Redis, Celery, BullMQ, RabbitMQ, ChromaDB, FAISS. AI: OpenAI Agents SDK, LangChain, LangGraph, Gemini, Ollama. ML: PyTorch, scikit-learn, XGBoost, LightGBM, OR-Tools. Frontend: React, Next.js, Vite. DevOps: Docker, GitHub Actions, Git, pytest, n8n." src="assets/stack/stack-light.svg" width="100%">
+  <img alt="Tech stack. Languages: Python, TypeScript, JavaScript, C++, C, SQL. Backend: FastAPI, Node.js, Express, Prisma, SQLAlchemy, Pydantic, Zod, LiveKit. Data: PostgreSQL, pgvector, SQLite, Redis, Celery, BullMQ, RabbitMQ, ChromaDB, FAISS. AI: OpenAI Agents SDK, LangChain, LangGraph, Gemini, Ollama. ML: PyTorch, scikit-learn, XGBoost, LightGBM, OR-Tools. Frontend: React, Next.js, Vite. DevOps: Docker, GitHub Actions, Git, pytest, n8n." src="assets/stack/stack-light.svg" width="100%">
 </picture>
 
 <p align="center"><img src="assets/ui/divider.svg" width="100%" alt=""></p>
 
 ## Achievements & Leadership
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/hackasol-dark.svg"><img alt="2nd Place, National: Hack-A-Sol 2025, 300+ teams, with Lumen" src="assets/awards/hackasol-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/apihub-dark.svg"><img alt="3rd Place: APIHub Hackathon 2025, 500+ teams, with Study AI" src="assets/awards/apihub-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/algouniversity-dark.svg"><img alt="National Select: AlgoUniversity Tech Fellowship 2025, Top 1000" src="assets/awards/algouniversity-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/aiml-dark.svg"><img alt="Head, AI/ML Club, IIIT Naya Raipur 2025-26; organised AI Impact Summit 2026 with 500+ participants" src="assets/awards/aiml-light.svg" width="410"></picture></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/hackasol26-dark.svg"><img alt="1st Place, AI/ML Track: Hack-A-Sol 2026, 100+ teams, with ZeroGuess; on the Hack-A-Sol podium two years running" src="assets/awards/hackasol26-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/flipswitch-dark.svg"><img alt="Top 20 of 702 projects: Flip the Switch 2026, 1,672 teams and 7,828 participants, with Prove It" src="assets/awards/flipswitch-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/hackasol-dark.svg"><img alt="2nd Place, National: Hack-A-Sol 2025, 300+ teams, with Lumen" src="assets/awards/hackasol-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/apihub-dark.svg"><img alt="3rd Place: APIHub Hackathon 2025, 500+ teams, with Study AI" src="assets/awards/apihub-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/algouniversity-dark.svg"><img alt="National Select: AlgoUniversity Tech Fellowship 2025, Top 1000" src="assets/awards/algouniversity-light.svg" width="410"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/awards/aiml-dark.svg"><img alt="Head, AI/ML Club, IIIT Naya Raipur 2025-26; organised AI Impact Summit 2026 with 500+ participants" src="assets/awards/aiml-light.svg" width="410"></picture></p>
 
 <p align="center"><sub>Certifications: Agentic AI Engineering (Ed Donner) &nbsp;·&nbsp; FastAPI: The Complete Course (Eric Roby &amp; Chad Darby) &nbsp;·&nbsp; The Complete Web Development Bootcamp (Angela Yu)</sub></p>
 

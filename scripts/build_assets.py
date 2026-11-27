@@ -535,6 +535,61 @@ def motif_examprep(p):
     return s
 
 
+def motif_zeroguess(p):
+    """The model drafts claims that cite sentences; code checks each one, column by column."""
+    T = 8.6
+    s = inset(p)
+    s += text(16, 24, "› prepayment charge today?", 11.5, p["text"], MONO)
+    s += (f'<circle cx="324" cy="20" r="3.5" fill="{p["ok"]}"><animate attributeName="opacity" values="1;0.25;1" '
+          f'dur="1.4s" repeatCount="indefinite"/></circle>' + text(332, 24, "live", 10.5, p["ok"], MONO))
+    s += f'<line x1="16" y1="36" x2="354" y2="36" stroke="{p["insetB"]}"/>'
+    cols = [("cite", 148), ("num", 178), ("date", 208), ("judge", 238)]
+    for lab, x in cols:
+        s += text(x, 52, lab, 9, p["muted"], MONO, anchor="middle")
+    s += text(16, 52, "draft claim", 9, p["muted"], MONO)
+    s += text(354, 52, "verdict", 9, p["muted"], MONO, anchor="end")
+    # each row: claim, cited sentence, check results in column order, verdict, timings
+    rows = [("fee is 2%", "s3", ["ok", "ok", "bad"], "✗ superseded", 0.7, 1.5),
+            ("fee is 0.5%", "s7", ["ok", "bad"], "✗ not in quote", 0.85, 2.8),
+            ("fee is nil", "s9", ["ok", "ok", "ok", "ok"], "✓ verified", 1.0, 3.8)]
+    step = 0.3
+    ys = [76, 102, 128]
+    # verifier cursor: a soft band that moves down the rows while checks run
+    band = (f'<rect x="8" y="{ys[0] - 15}" width="354" height="22" rx="6" fill="{p["acc"]}" fill-opacity="0.08" '
+            f'stroke="{p["acc"]}" stroke-opacity="0.25" opacity="0">'
+            f'{loop("y", T, [(1.3, ys[0] - 15), (2.6, ys[1] - 15), (3.6, ys[2] - 15)], 0, "discrete")}'
+            f'{window(T, 1.3, 5.2, 0.15)}</rect>')
+    s += band
+    for (claim, cite, checks, verdict, a_draft, a_check), y in zip(rows, ys):
+        cw = mono_w(claim, 11)
+        row = text(16, y, claim, 11, p["text"], MONO) + text(16 + cw + 8, y, f"[{cite}]", 11, p["acc2"], MONO)
+        s += f'<g opacity="0">{window(T, a_draft, T - 0.3, 0.2)}{row}</g>'
+        for _, x in cols:
+            s += f'<circle cx="{x}" cy="{y - 4}" r="6.5" fill="{p["chip"]}" stroke="{p["chipB"]}"/>'
+        for k, res in enumerate(checks):
+            x = cols[k][1]
+            col = p[res]
+            a = a_check + k * step
+            s += (f'<g opacity="0">{window(T, a, T - 0.3, 0.12)}'
+                  f'<circle cx="{x}" cy="{y - 4}" r="6.5" fill="{col}" fill-opacity="0.18" stroke="{col}"/>'
+                  + text(x, y - 0.5, "✓" if res == "ok" else "✗", 9.5, col, MONO, "700", "middle") + '</g>')
+        a_v = a_check + len(checks) * step - 0.05
+        ok = verdict.startswith("✓")
+        vcol = p["ok"] if ok else p["bad"]
+        s += (f'<g opacity="0">{window(T, a_v, T - 0.3, 0.15)}'
+              + text(354, y, verdict, 10.5, vcol, MONO, "600", "end") + '</g>')
+        if not ok:
+            s += (f'<line x1="14" y1="{y - 4}" x2="{f(16 + cw + 2)}" y2="{y - 4}" stroke="{p["bad"]}" stroke-width="1.6" '
+                  f'pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" opacity="0">'
+                  f'{loop("stroke-dashoffset", T, [(a_v, 100), (a_v + 0.3, 0)])}{window(T, a_v, T - 0.3, 0.1)}</line>')
+    # the answer only carries what survived
+    s += (f'<g opacity="0">{window(T, 5.4, T - 0.3, 0.25)}<rect x="16" y="148" width="338" height="28" rx="9" '
+          f'fill="{p["ok"]}" fill-opacity="0.12" stroke="{p["ok"]}" stroke-opacity="0.55"/>'
+          + text(28, 166, "answer: nil [s9]", 11, p["ok"], MONO, "700")
+          + text(342, 166, "2 claims blocked", 10.5, p["text2"], MONO, anchor="end") + '</g>')
+    return s
+
+
 def motif_causalline(p):
     T = 8.4
     s = inset(p)
@@ -713,19 +768,23 @@ PROJECTS = [
          tag=["Turns slides and past papers into an exam-ranked", "knowledge base that answers with citations."],
          tag_m=["Turns slides and past papers into an", "exam-ranked knowledge base that", "answers with citations."],
          chips=["FastAPI", "Celery", "Redis", "ChromaDB", "Agents SDK"], motif=motif_examprep),
-    dict(slug="causalline", idx="02", name="CausalLine", pill="LEAD DEVELOPER · RESEARCH",
+    dict(slug="zeroguess", idx="02", name="ZeroGuess", pill="1ST PLACE · AI/ML · HACK-A-SOL 2026",
+         tag=["Answers from bank and insurance PDFs only when", "every sentence matches a quote, or says no proof."],
+         tag_m=["Answers from bank and insurance PDFs", "only when every sentence matches a", "quote, or says it has no proof."],
+         chips=["FastAPI", "Postgres + pgvector", "Gemini", "SSE", "Docker"], motif=motif_zeroguess),
+    dict(slug="causalline", idx="03", name="CausalLine", pill="LEAD DEVELOPER · RESEARCH",
          tag=["Recovers multi-agent LLM workflows after prompt", "injection, replaying only the work it influenced."],
          tag_m=["Recovers multi-agent LLM workflows", "after prompt injection, replaying only", "the work it influenced."],
          chips=["Python 3.11", "Provenance", "Counterfactuals", "600+ tests"], motif=motif_causalline),
-    dict(slug="studyai", idx="03", name="Study AI", pill="3RD PLACE · APIHUB 2025",
+    dict(slug="studyai", idx="04", name="Study AI", pill="3RD PLACE · APIHUB 2025",
          tag=["Turns notes into six kinds of study material, with", "grounded document Q&A and shared study groups."],
          tag_m=["Turns notes into six kinds of study", "material, with grounded document Q&A", "and shared study groups."],
          chips=["FastAPI", "SQLAlchemy", "FAISS + BM25", "OAuth 2.0"], motif=motif_studyai),
-    dict(slug="proveit", idx="04", name="Prove It", pill="HACKATHON · TEAM OF 4",
+    dict(slug="proveit", idx="05", name="Prove It", pill="TOP 20 OF 702 · FLIP THE SWITCH",
          tag=["Bug reports must reproduce in a locked-down sandbox", "before a maintainer reads them."],
          tag_m=["Bug reports must reproduce in a", "locked-down sandbox before a", "maintainer reads them."],
          chips=["Docker", "Claude Code", "Codex", "325 tests · CI"], motif=motif_proveit),
-    dict(slug="lumen", idx="05", name="Lumen", pill="2ND PLACE (NATIONAL) · HACK-A-SOL",
+    dict(slug="lumen", idx="06", name="Lumen", pill="2ND PLACE (NATIONAL) · HACK-A-SOL",
          tag=["Reads receipts with an LLM, categorises spending,", "and answers questions from the user's own records."],
          tag_m=["Reads receipts with an LLM,", "categorises spending, and answers", "questions from your own records."],
          chips=["FastAPI", "PostgreSQL", "React + TS", "FAISS", "Gemini"], motif=motif_lumen),
@@ -885,7 +944,7 @@ STACK = [
     ("Backend & APIs", [("FastAPI", "fastapi"), ("Node.js", "nodedotjs"), ("Express", "express"), ("Prisma", "prisma"),
                         ("SQLAlchemy", "sqlalchemy"), ("Pydantic", "pydantic"), ("Zod", "zod"), ("LiveKit", "livekit"),
                         ("REST · WebSockets · SSE", None)]),
-    ("Data & Messaging", [("PostgreSQL", "postgresql"), ("SQLite", "sqlite"), ("Redis", "redis"), ("Celery", "celery"),
+    ("Data & Messaging", [("PostgreSQL", "postgresql"), ("pgvector", None), ("SQLite", "sqlite"), ("Redis", "redis"), ("Celery", "celery"),
                           ("BullMQ", None), ("RabbitMQ", "rabbitmq"), ("ChromaDB", None), ("FAISS", None)]),
     ("AI & LLM", [("OpenAI Agents SDK", None), ("LangChain", "langchain"), ("LangGraph", "langgraph"),
                   ("Gemini", "googlegemini"), ("Ollama", "ollama"), ("Sentence Transformers", "huggingface"),
@@ -982,6 +1041,21 @@ def trophy(cx, cy, col):
             f'stroke-width="2" stroke-linecap="round"/>')
 
 
+def trophy_first(cx, cy, col):
+    return trophy(cx, cy, col) + text(cx, cy + 0.5, "1", 10, col, SANS, "700", "middle")
+
+
+def switch(cx, cy, col):
+    """A toggle that flips on: Flip the Switch."""
+    return (f'<rect x="{cx - 15}" y="{cy - 8}" width="30" height="16" rx="8" fill="{col}" fill-opacity="0" '
+            f'stroke="{col}" stroke-width="2"><animate attributeName="fill-opacity" from="0" to="0.3" begin="1.1s" '
+            f'dur="0.3s" fill="freeze"/></rect>'
+            f'<circle cx="{cx - 7}" cy="{cy}" r="4.6" fill="{col}"><animate attributeName="cx" from="{cx - 7}" '
+            f'to="{cx + 7}" begin="1.1s" dur="0.3s" fill="freeze" calcMode="spline" keyTimes="0;1" '
+            f'keySplines="0.4 0 0.2 1"/></circle>'
+            + text(cx, cy + 22, "TOP 20", 7.5, col, MONO, "700", "middle", ls=0.5))
+
+
 def medal(cx, cy, col):
     return (f'<path d="M{cx - 8},{cy - 15} l5,10 M{cx + 8},{cy - 15} l-5,10" stroke="{col}" stroke-width="2" '
             f'stroke-linecap="round"/><circle cx="{cx}" cy="{cy + 4}" r="10" fill="none" stroke="{col}" stroke-width="2"/>'
@@ -1005,6 +1079,10 @@ def people(cx, cy, col):
 
 
 AWARDS = [
+    dict(slug="hackasol26", icon=trophy_first, color="gold", title="1st Place · AI/ML Track",
+         lines=["Hack-A-Sol 2026 · 100+ teams", "Built ZeroGuess · podium two years running"]),
+    dict(slug="flipswitch", icon=switch, color="acc3", title="Top 20 of 702 Projects",
+         lines=["Flip the Switch 2026 · 1,672 teams", "7,828 participants · Built Prove It"]),
     dict(slug="hackasol", icon=trophy, color="silver", title="2nd Place · National",
          lines=["Hack-A-Sol 2025 · 300+ teams", "Built Lumen"]),
     dict(slug="apihub", icon=medal, color="bronze", title="3rd Place",
@@ -1079,6 +1157,8 @@ def wave():
 def button(label, kind):
     if kind == "demo":
         W, H, fill, stroke = 142, 32, "#0D9488", "#14B8A6"
+    elif kind == "live":
+        W, H, fill, stroke = 118, 32, "#0369A1", "#0EA5E9"
     else:
         W, H, fill, stroke = 104, 32, "#24292F", "#3D444D"
     body = f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="9" fill="{fill}" stroke="{stroke}"/>'
@@ -1087,6 +1167,14 @@ def button(label, kind):
                  '<animate attributeName="r" values="7;12" dur="1.6s" repeatCount="indefinite"/>'
                  '<animate attributeName="opacity" values="0.8;0" dur="1.6s" repeatCount="indefinite"/></circle>'
                  '<path d="M16.5,10.5 L25,16 L16.5,21.5 Z" fill="#FFFFFF"/>')
+    elif kind == "live":
+        # a "deployed and serving" beacon: solid dot with an expanding ring
+        body += ('<circle cx="20" cy="16" r="4" fill="#4ADE80"/>'
+                 '<circle cx="20" cy="16" r="4" fill="none" stroke="#4ADE80" stroke-width="1.5">'
+                 '<animate attributeName="r" values="4;10" dur="1.8s" repeatCount="indefinite"/>'
+                 '<animate attributeName="opacity" values="0.9;0" dur="1.8s" repeatCount="indefinite"/></circle>')
+        body += ('<path d="M98,12 L106,12 L106,20 M106,12 L97,21" fill="none" stroke="#FFFFFF" stroke-opacity="0.85" '
+                 'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>')
     else:
         body += ('<path d="M17,11 L12,16 L17,21 M23,11 L28,16 L23,21" fill="none" stroke="#FFFFFF" stroke-width="1.8" '
                  'stroke-linecap="round" stroke-linejoin="round"/>')
@@ -1117,6 +1205,7 @@ def main():
     write("ui/wave.svg", wave())
     write("ui/btn-code.svg", button("Code", "code"))
     write("ui/btn-demo.svg", button("Demo Video", "demo"))
+    write("ui/btn-live.svg", button("Live App", "live"))
 
 
 if __name__ == "__main__":
