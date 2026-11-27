@@ -1182,6 +1182,45 @@ def button(label, kind):
     return svg(W, H, label, body)
 
 
+def portfolio_badge():
+    """Header badge for the portfolio site, sized to sit beside shields.io for-the-badge badges (28px, square).
+
+    The site is a terminal-style console, so the badge is one: a prompt, the label typed in, a blinking
+    cursor, and a light sweep every few seconds.
+    """
+    W, H = 132, 28
+    ty = 18.2
+    lx, lw = 33, 75
+    defs = ('<linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0D131A"/>'
+            '<stop offset="1" stop-color="#132330"/></linearGradient>'
+            '<linearGradient id="psh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5EEAD4" '
+            'stop-opacity="0"/><stop offset="0.5" stop-color="#5EEAD4" stop-opacity="0.28"/>'
+            '<stop offset="1" stop-color="#5EEAD4" stop-opacity="0"/></linearGradient>'
+            f'<clipPath id="pclip"><rect width="{W}" height="{H}"/></clipPath>'
+            f'<clipPath id="ptype"><rect x="{lx - 1}" y="0" width="0" height="{H}">'
+            f'<animate attributeName="width" begin="0.35s" dur="0.75s" fill="freeze" calcMode="discrete" '
+            f'values="{";".join(f(lw * k / 9 + (3 if k == 9 else 0)) for k in range(10))}"/></rect></clipPath>')
+    body = (f'<g shape-rendering="crispEdges"><rect width="{W}" height="{H}" fill="url(#pbg)"/>'
+            f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" fill="none" stroke="#2DD4BF" stroke-opacity="0.85"/>'
+            f'<rect x="0" y="0" width="3" height="{H}" fill="#2DD4BF"/></g>')
+    # prompt
+    body += (f'<text x="11" y="{ty}" font-family="{MONO}" font-size="11" font-weight="700" fill="#2DD4BF">~$</text>')
+    # label, typed in once
+    body += (f'<g clip-path="url(#ptype)"><text x="{lx}" y="{ty}" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" '
+             f'font-size="10" font-weight="bold" fill="#FFFFFF" textLength="{lw}" lengthAdjust="spacing">PORTFOLIO</text></g>')
+    # cursor rides the typing, then blinks
+    cx0, cx1 = lx, lx + lw + 4
+    body += (f'<rect x="{cx0}" y="8" width="6" height="12" fill="#2DD4BF">'
+             f'<animate attributeName="x" values="{";".join(f(cx0 + (cx1 - cx0) * k / 9) for k in range(10))}" '
+             f'begin="0.35s" dur="0.75s" fill="freeze" calcMode="discrete"/>'
+             f'<animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="1.05s" '
+             f'repeatCount="indefinite"/></rect>')
+    # periodic light sweep
+    body += (f'<g clip-path="url(#pclip)"><rect x="-60" y="0" width="48" height="{H}" fill="url(#psh)" '
+             f'transform="skewX(-20)">{loop("x", 6, [(0, -60), (1.3, W + 30), (6, W + 30)], begin=1.4)}</rect></g>')
+    return svg(W, H, "Portfolio: siddharthpandey20.github.io", body, defs)
+
+
 # ----------------------------------------------------------------------------- build
 def main():
     for p in THEMES:
@@ -1206,6 +1245,7 @@ def main():
     write("ui/btn-code.svg", button("Code", "code"))
     write("ui/btn-demo.svg", button("Demo Video", "demo"))
     write("ui/btn-live.svg", button("Live App", "live"))
+    write("ui/badge-portfolio.svg", portfolio_badge())
 
 
 if __name__ == "__main__":

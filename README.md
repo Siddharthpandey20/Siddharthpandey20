@@ -19,6 +19,7 @@
   <img alt="Backends that hold up · Hybrid retrieval · Multi-agent systems · 82 PRs merged · 1st in AI/ML at Hack-A-Sol 2026, top 20 of 702 at Flip the Switch · First author, MMCITRE 2025 and NCA 2026" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=2600&pause=1100&color=0F766E&center=true&vCenter=true&width=760&height=34&lines=Backends%20that%20hold%20up%3A%20queues%2C%20retries%2C%20rate%20limits%2C%20tests;Hybrid%20retrieval%3A%20BM25%20%2B%20dense%20vectors%20%2B%20rank%20fusion;Multi-agent%20systems%20where%20humans%20make%20the%20final%20call;82%20PRs%20merged%20into%20a%20production%20AI%20interview%20platform;1st%20in%20AI%2FML%20at%20Hack-A-Sol%202026%20%C2%B7%20Top%2020%20of%20702%20at%20Flip%20the%20Switch;First%20author%20%C2%B7%20MMCITRE%202025%20%28Springer%29%20%C2%B7%20NCA%202026">
 </picture>
 
+<a href="https://siddharthpandey20.github.io"><img alt="Portfolio" src="assets/ui/badge-portfolio.svg" height="28"></a>
 <a href="https://www.linkedin.com/in/siddharth-a35a36324"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
 <a href="mailto:siddharthpandey2611official@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-0F766E?style=for-the-badge&logo=gmail&logoColor=white"></a>
 <a href="https://leetcode.com/u/_Siddharth_pandey/"><img alt="LeetCode" src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black"></a>
@@ -274,7 +275,7 @@ Receipts go through OCR, LLM parsing and categorisation into a per-user FAISS in
 
 <p align="center">
 <b>Open to SDE, backend and AI engineering roles.</b><br>
-<sub><a href="https://www.linkedin.com/in/siddharth-a35a36324">LinkedIn</a> &nbsp;·&nbsp; <a href="mailto:siddharthpandey2611official@gmail.com">Email</a> &nbsp;·&nbsp; <a href="https://leetcode.com/u/_Siddharth_pandey/">LeetCode</a></sub><br><br>
+<sub><a href="https://siddharthpandey20.github.io">Portfolio</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/siddharth-a35a36324">LinkedIn</a> &nbsp;·&nbsp; <a href="mailto:siddharthpandey2611official@gmail.com">Email</a> &nbsp;·&nbsp; <a href="https://leetcode.com/u/_Siddharth_pandey/">LeetCode</a></sub><br><br>
 <img alt="Profile views" src="https://komarev.com/ghpvc/?username=Siddharthpandey20&style=flat-square&color=0D9488&label=profile+views">
 </p>
 
